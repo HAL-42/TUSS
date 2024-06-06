@@ -1,0 +1,21 @@
+[submodule "others/SAN"]
+	path = others/SAN
+	url = https://gitee.com/HAL-42/sam-clip-joint-san.git
+[submodule "others/segment-anything"]
+	path = others/segment-anything
+	url = https://gitee.com/HAL-42/sam-clip-joint.segment-anything.git
+[submodule "others/SCLIP"]
+	path = others/SCLIP
+	url = https://gitee.com/HAL-42/sam-clip-joint-sclip.git
+[submodule "others/WeightedPCA"]
+	path = others/WeightedPCA
+	url = https://gitee.com/HAL-42/sam-clip-joint-weighted-pca.git
+[submodule "others/sam-hq"]
+	path = others/sam-hq
+	url = https://gitee.com/HAL-42/sam-clip-joint_sam-hq.git
+[submodule "others/AugSeg"]
+	path = others/AugSeg
+	url = https://gitee.com/HAL-42/SAM-CLIP-Joint_AugSeg.git
+[submodule "others/mmsegmentation"]
+	path = others/mmsegmentation
+	url = https://gitee.com/HAL-42/SAM-CLIP-Joint_mmsegmentation.git

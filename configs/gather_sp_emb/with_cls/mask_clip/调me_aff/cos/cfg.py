@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+@Author  : Xiaobo Yang
+@Contact : hal_42@zju.edu.cn
+@Time    : 2023/12/19 20:41
+@File    : cfg.py
+@Software: PyCharm
+@Desc    : 
+"""
+from alchemy_cat.py_tools import Cfg2Tune, Config, Param2Tune
+
+cfg = config = Cfg2Tune('configs/addon/emb_cls_metrics.py', caps='configs/gather_sp_emb/with_cls/base.py')
+
+cfg.rslt_dir = ...
+
+# -* 配置语义嵌入提取。
+cfg.gather_cfg = Cfg2Tune(caps='configs/gather_sp_emb/clip,samq,mask_clip/base.py')
+cfg.gather_cfg.set_whole()
+
+@cfg.gather_cfg.set_IL(name='rslt_dir')  # noqa: E302
+def gather_cfg_rslt_dir(c: Config):
+    return c.rslt_dir
+
+# -* 配置m2m。
+cfg.gather_cfg.extractor.ini.mask_emb_aff_method.method = 'self_att'
+cfg.gather_cfg.extractor.ini.mask_emb_aff_method.sim_type = 'cos'
+cfg.gather_cfg.extractor.ini.mask_emb_aff_method.sim_scale = Param2Tune([10., 50., 100., 150.])
+cfg.gather_cfg.extractor.ini.mask_emb_aff_method.aff_alpha = Param2Tune([0.25, 0.5, 0.75])
+
+# -* 配置种子生成参数。
+cfg.cls_cfg.seed.fg_methods = [{'softmax': 1., 'norm': True}]
+cfg.cls_cfg.seed.bg_methods = [{'method': 'thresh', 'thresh': 0.2},
+                               {'method': 'thresh', 'thresh': 0.3},
+                               {'method': 'thresh', 'thresh': 0.4},
+                               {'method': 'thresh', 'thresh': 0.5},
+                               {'method': 'thresh', 'thresh': 0.6},
+                               {'method': 'thresh', 'thresh': 0.7}]
